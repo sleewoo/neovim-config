@@ -1,0 +1,42 @@
+{
+  "import from ./": {
+    "prefix": ["i/."],
+    "body": ["import { $2 } from \"./$1\";"]
+  },
+  "import default from ./": {
+    "prefix": ["id/."],
+    "body": ["import $1 from \"./$2\";"]
+  },
+  "import from ../": {
+    "prefix": ["i/.."],
+    "body": ["import { $2 } from \"../$1\";"]
+  },
+  "import default from ../": {
+    "prefix": ["id/.."],
+    "body": ["import $1 from \"../$2\";"]
+  },
+  "import from ~/": {
+    "prefix": ["i/~"],
+    "body": ["import { $2 } from \"~/$1\";"]
+  },
+  "import default from ~/": {
+    "prefix": ["id/~"],
+    "body": ["import $1 from \"~/$2\";"]
+  },
+  "import from @/": {
+    "prefix": ["i/@"],
+    "body": ["import { $2 } from \"@/$1\";"]
+  },
+  "import default from @/": {
+    "prefix": ["id/@"],
+    "body": ["import $1 from \"@/$2\";"]
+  },
+  "import type from ~/": {
+    "prefix": ["it/~"],
+    "body": ["import type { $2 } from \"~/$1\";"]
+  },
+  "import type from @/": {
+    "prefix": ["it/@"],
+    "body": ["import type { $2 } from \"@/$1\";"]
+  }
+}
