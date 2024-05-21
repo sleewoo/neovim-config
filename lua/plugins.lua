@@ -197,12 +197,7 @@ return {
     "folke/zen-mode.nvim",
     opts = {
       plugins = {
-        twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-        tmux = { enabled = false }, -- disables the tmux statusline
-        kitty = {
-          enabled = true,
-          font = "+5", -- font size increment
-        },
+        twilight = { enabled = false },
       },
     },
     keys = {
