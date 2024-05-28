@@ -1,12 +1,27 @@
-require("neoscroll").setup({
-  mappings = { "C-Up", "C-Down", "C-A-Up", "C-A-Down" },
-})
+local neoscroll = require("neoscroll")
 
-local mappings = {}
+neoscroll.setup({ mappings = {} })
 
-mappings["<C-Up>"] = { "scroll", { "-0.10", "false", "100" } }
-mappings["<C-Down>"] = { "scroll", { "0.10", "false", "100" } }
-mappings["<C-A-Up>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
-mappings["<C-A-Down>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
+local keymap = {
+  ["<C-Up>"] = function()
+    neoscroll.scroll(-0.3, { move_cursor = false, duration = 100 })
+  end,
 
-require("neoscroll.config").set_mappings(mappings)
+  ["<C-A-Up>"] = function()
+    neoscroll.ctrl_u({ duration = 250 })
+  end,
+
+  ["<C-Down>"] = function()
+    neoscroll.scroll(0.3, { move_cursor = false, duration = 100 })
+  end,
+
+  ["<C-A-Down>"] = function()
+    neoscroll.ctrl_d({ duration = 250 })
+  end,
+}
+
+local modes = { "n", "v", "x" }
+
+for key, func in pairs(keymap) do
+  vim.keymap.set(modes, key, func)
+end
