@@ -19,6 +19,7 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "sql",
     "xml",
+    "markdown_inline",
   }, -- one of "all", or a list of languages
 
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
