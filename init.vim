@@ -69,7 +69,7 @@ vmap <leader>p "+p
 vmap <leader>P "+P
 
 " close quickfix list
-nmap <leader>q :cclose <bar> :TroubleClose<cr>
+nmap <silent> <leader>q :cclose <bar> :Trouble close<cr>
 
 " open new empty tab next to current one
 nnoremap <C-n> :tabnew<cr>

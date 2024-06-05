@@ -165,8 +165,23 @@ return {
     "folke/trouble.nvim",
     lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>dw",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>dd",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+    },
     config = function()
-      require("setup.trouble")
+      require("trouble").setup({
+        auto_preview = false,
+      })
     end,
   },
   {
