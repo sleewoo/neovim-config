@@ -1,99 +1,52 @@
-local present, signs = pcall(require, "gitsigns")
+local gitsigns = require("gitsigns")
 
-if not present then
-  return
-end
-
--- ╭──────────────────────────────────────────────────────────╮
--- │ Setup                                                    │
--- ╰──────────────────────────────────────────────────────────╯
-signs.setup({
-
-  signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-  numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  watch_gitdir = {
-    interval = 700,
-    follow_files = true,
-  },
-  attach_to_untracked = true,
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  current_line_blame_opts = {
-    virt_text = true,
-    virt_text_pos = "eol", -- "eol" | "overlay" | "right_align"
-    delay = 700,
-    ignore_whitespace = false,
-  },
-  current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
-  sign_priority = 6,
-  update_debounce = 100,
-  status_formatter = nil, -- Use default
-  max_file_length = 40000,
-  preview_config = {
-    -- Options passed to nvim_open_win
-    style = "minimal",
-    relative = "cursor",
-    row = 0,
-    col = 1,
-  },
-  yadm = {
-    enable = false,
-  },
+gitsigns.setup({
   on_attach = function(bufnr)
-    local gs = package.loaded.gitsigns
-
     local function map(mode, l, r, opts)
       opts = opts or {}
       opts.buffer = bufnr
       vim.keymap.set(mode, l, r, opts)
     end
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ Keymappings                                              │
-    -- ╰──────────────────────────────────────────────────────────╯
-
     -- Navigation
     map("n", "]c", function()
       if vim.wo.diff then
-        return "]c"
+        vim.cmd.normal({ "]c", bang = true })
+      else
+        gitsigns.nav_hunk("next")
       end
-      vim.schedule(function()
-        gs.next_hunk()
-      end)
-      return "<Ignore>"
-    end, { expr = true })
+    end)
 
     map("n", "[c", function()
       if vim.wo.diff then
-        return "[c"
+        vim.cmd.normal({ "[c", bang = true })
+      else
+        gitsigns.nav_hunk("prev")
       end
-      vim.schedule(function()
-        gs.prev_hunk()
-      end)
-      return "<Ignore>"
-    end, { expr = true })
+    end)
 
     -- Actions
-    map("n", "<leader>hs", gs.stage_hunk)
+    map("n", "<leader>hs", gitsigns.stage_hunk)
+    map("n", "<leader>hr", gitsigns.reset_hunk)
     map("v", "<leader>hs", function()
-      gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+      gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
     end)
-    map("n", "<leader>hu", gs.undo_stage_hunk)
-
-    map("n", "<leader>hr", gs.reset_hunk)
     map("v", "<leader>hr", function()
-      gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+      gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
     end)
-
-    -- map("n", "<leader>hS", gs.stage_buffer)
-    -- map("n", "<leader>hR", gs.reset_buffer)
-    map("n", "<leader>hp", gs.preview_hunk)
-    -- map("n", "<leader>hb", function() gs.blame_line{full=true} end)
-    -- map("n", "<leader>tb", gs.toggle_current_line_blame)
-    map("n", "<leader>hd", gs.diffthis)
-    -- map("n", "<leader>hD", function() gs.diffthis("~") end)
-    map("n", "<leader>gd", gs.toggle_deleted)
+    map("n", "<leader>hS", gitsigns.stage_buffer)
+    map("n", "<leader>hu", gitsigns.undo_stage_hunk)
+    map("n", "<leader>hR", gitsigns.reset_buffer)
+    map("n", "<leader>hp", gitsigns.preview_hunk)
+    map("n", "<leader>hb", function()
+      gitsigns.blame_line({ full = true })
+    end)
+    map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
+    map("n", "<leader>hd", gitsigns.diffthis)
+    map("n", "<leader>hD", function()
+      gitsigns.diffthis("~")
+    end)
+    map("n", "<leader>td", gitsigns.toggle_deleted)
 
     -- Text object
     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
