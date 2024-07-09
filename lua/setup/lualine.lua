@@ -6,8 +6,8 @@ require("lualine").setup({
     ignore_focus = { "NvimTree", "toggleterm" },
   },
 
-  sections = {
-    lualine_c = {
+  tabline = {
+    lualine_a = {
       {
         "filename",
         file_status = true,
@@ -21,15 +21,12 @@ require("lualine").setup({
         },
       },
     },
-  },
-
-  tabline = {
-    lualine_a = {
+    lualine_y = {
       {
         "tabs",
         mode = 1,
         fmt = function(_, context)
-          return " 󰈙 " .. context.tabnr
+          return "◈ " .. context.tabnr
         end,
       },
     },
