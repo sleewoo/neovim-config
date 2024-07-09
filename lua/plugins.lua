@@ -348,6 +348,13 @@ return {
     "RRethy/vim-illuminate",
     lazy = false,
   },
+  {
+    "lewis6991/hover.nvim",
+    lazy = false,
+    config = function()
+      require("setup.hover")
+    end,
+  },
 
   -- Git
   {
