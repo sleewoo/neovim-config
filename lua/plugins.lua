@@ -323,10 +323,10 @@ return {
     end,
   },
   {
-    "aserowy/tmux.nvim",
+    "mrjones2014/smart-splits.nvim",
     lazy = false,
     config = function()
-      require("setup.tmux")
+      require("setup.smart-splits")
     end,
   },
   {
