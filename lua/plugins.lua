@@ -80,18 +80,12 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
-    cmd = {
-      "NvimTreeOpen",
-      "NvimTreeClose",
-      "NvimTreeToggle",
-      "NvimTreeFindFile",
-      "NvimTreeFindFileToggle",
-    },
-    keys = {
-      { "<leader>e", "<cmd>lua require('nvim-tree.api').tree.toggle()<cr>", desc = "Tree" },
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("setup.tree")
+      require("setup.nvim-tree")
     end,
   },
   {
