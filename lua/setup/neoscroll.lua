@@ -3,19 +3,19 @@ local neoscroll = require("neoscroll")
 neoscroll.setup({ mappings = {} })
 
 local keymap = {
-  ["<S-Up>"] = function()
+  ["<A-Up>"] = function()
     neoscroll.scroll(-0.3, { move_cursor = false, duration = 100 })
   end,
 
-  ["<C-S-Up>"] = function()
+  ["<A-C-Up>"] = function()
     neoscroll.ctrl_u({ duration = 250 })
   end,
 
-  ["<S-Down>"] = function()
+  ["<A-Down>"] = function()
     neoscroll.scroll(0.3, { move_cursor = false, duration = 100 })
   end,
 
-  ["<C-S-Down>"] = function()
+  ["<A-C-Down>"] = function()
     neoscroll.ctrl_d({ duration = 250 })
   end,
 }
