@@ -1,27 +1,44 @@
-require("smart-splits").setup({
+local smartSplits = require("smart-splits")
+
+smartSplits.setup({
+  -- wrap => Wrap to opposite side
+  -- split => Create a new split in the desired direction
+  -- stop => Do nothing
+  at_edge = "stop",
+
   -- the default number of lines/columns to resize by at a time
   default_amount = 5,
+
   -- disable multiplexer navigation if current multiplexer pane is zoomed
-  disable_multiplexer_nav_when_zoomed = false,
+  disable_multiplexer_nav_when_zoomed = true,
+
+  -- whether the cursor should follow the buffer when swapping
+  cursor_follows_swapped_bufs = true,
 })
 
--- resizing splits
--- these keymaps will also accept a range,
--- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-vim.keymap.set("n", "<A-left>", require("smart-splits").resize_left)
-vim.keymap.set("n", "<A-down>", require("smart-splits").resize_down)
-vim.keymap.set("n", "<A-up>", require("smart-splits").resize_up)
-vim.keymap.set("n", "<A-right>", require("smart-splits").resize_right)
+local keymap = {
+  -- resizing splits
+  ["<C-S-A-Left>"] = smartSplits.resize_left,
+  ["<C-S-A-Down>"] = smartSplits.resize_down,
+  ["<C-S-A-Up>"] = smartSplits.resize_up,
+  ["<C-S-A-Right>"] = smartSplits.resize_right,
 
--- moving between splits
-vim.keymap.set("n", "<C-left>", require("smart-splits").move_cursor_left)
-vim.keymap.set("n", "<C-down>", require("smart-splits").move_cursor_down)
-vim.keymap.set("n", "<C-up>", require("smart-splits").move_cursor_up)
-vim.keymap.set("n", "<C-right>", require("smart-splits").move_cursor_right)
-vim.keymap.set("n", "<C-\\>", require("smart-splits").move_cursor_previous)
+  -- moving between splits
+  ["<C-Left>"] = smartSplits.move_cursor_left,
+  ["<C-Down>"] = smartSplits.move_cursor_down,
+  ["<C-Up>"] = smartSplits.move_cursor_up,
+  ["<C-Right>"] = smartSplits.move_cursor_right,
+  ["<C-\\>"] = smartSplits.move_cursor_previous,
 
--- swapping buffers between windows
-vim.keymap.set("n", "<C-A-Left>", require("smart-splits").swap_buf_left)
-vim.keymap.set("n", "<C-A-Down>", require("smart-splits").swap_buf_down)
-vim.keymap.set("n", "<C-A-Up>", require("smart-splits").swap_buf_up)
-vim.keymap.set("n", "<C-A-Right>", require("smart-splits").swap_buf_right)
+  -- swapping buffers between windows
+  ["<A-S-Left>"] = smartSplits.swap_buf_left,
+  ["<A-S-Down>"] = smartSplits.swap_buf_down,
+  ["<A-S-Up>"] = smartSplits.swap_buf_up,
+  ["<A-S-Right>"] = smartSplits.swap_buf_right,
+}
+
+local modes = { "n" }
+
+for key, func in pairs(keymap) do
+  vim.keymap.set(modes, key, func)
+end
