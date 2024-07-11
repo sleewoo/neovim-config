@@ -6,7 +6,7 @@ lua require("init")
 set confirm
 set number
 set cursorline
-
+set noequalalways
 set colorcolumn=80
 set updatetime=100
 set signcolumn=yes
@@ -73,9 +73,6 @@ nmap <silent> <leader>q :cclose <bar> :Trouble close<cr>
 
 " open new empty tab next to current one
 nnoremap <C-n> :tabnew<cr>
-
-" zoom current window
-nmap <silent> <C-w>z :tabnew %<CR>
 
 " Go to tab by number
 noremap <leader>1 1gt
