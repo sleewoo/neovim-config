@@ -50,15 +50,15 @@ local function on_attach(bufnr)
     ["<Tab>"] = { api.node.open.preview, "Open Preview" },
     ["o"] = { api.node.open.edit, "Open" },
     ["O"] = { api.node.open.no_window_picker, "Open: No Window Picker" },
-    ["<C-t>"] = { api.node.open.tab, "Open: New Tab" },
-    ["<C-v>"] = { api.node.open.vertical, "Open: Vertical Split" },
-    ["<C-s>"] = { api.node.open.horizontal, "Open: Horizontal Split" },
+    ["t"] = { api.node.open.tab, "Open: New Tab" },
+    ["v"] = { api.node.open.vertical, "Open: Vertical Split" },
+    ["s"] = { api.node.open.horizontal, "Open: Horizontal Split" },
     ["<2-LeftMouse>"] = { api.node.open.edit, "Open" },
 
     ["a"] = { api.fs.create, "Create" },
 
-    ["D"] = { api.fs.trash, "Delete: Trash" },
-    ["<C-S-d>"] = { api.fs.remove, "Delete: Permanently" },
+    ["d"] = { api.fs.trash, "Delete: Trash" },
+    ["D"] = { api.fs.remove, "Delete: Permanently" },
 
     ["r"] = { api.fs.rename, "Rename" },
     ["R"] = { api.fs.rename_basename, "Rename: Basename" },
@@ -69,8 +69,8 @@ local function on_attach(bufnr)
     [">"] = { api.node.navigate.sibling.next, "Next Sibling" },
     ["<"] = { api.node.navigate.sibling.prev, "Previous Sibling" },
 
-    ["E"] = { api.tree.expand_all, "Expand All" },
-    ["W"] = { api.tree.collapse_all, "Collapse" },
+    ["="] = { api.tree.expand_all, "Expand All" },
+    ["-"] = { api.tree.collapse_all, "Collapse" },
 
     ["f"] = { api.live_filter.start, "Filter" },
     ["F"] = { api.live_filter.clear, "Clean Filter" },
@@ -84,13 +84,13 @@ local function on_attach(bufnr)
     ["<A-y>"] = { api.fs.copy.absolute_path, "Copy Absolute Path" },
 
     ["."] = { api.node.run.cmd, "Run Command" },
-    ["s"] = { api.node.run.system, "Run System" },
+    ["<C-s>"] = { api.node.run.system, "Run System" },
 
-    ["tb"] = { api.tree.toggle_no_buffer_filter, "Toggle No Buffer" },
-    ["tg"] = { api.tree.toggle_git_clean_filter, "Toggle Git Clean" },
-    ["th"] = { api.tree.toggle_hidden_filter, "Toggle Dotfiles" },
-    ["tH"] = { api.tree.toggle_custom_filter, "Toggle Hidden" },
-    ["ti"] = { api.tree.toggle_gitignore_filter, "Toggle Git Ignore" },
+    ["<A-b>"] = { api.tree.toggle_no_buffer_filter, "Toggle No Buffer" },
+    ["<A-g>"] = { api.tree.toggle_git_clean_filter, "Toggle Git Clean" },
+    ["<A-i>"] = { api.tree.toggle_gitignore_filter, "Toggle Git Ignore" },
+    ["<A-.>"] = { api.tree.toggle_hidden_filter, "Toggle Dotfiles" },
+    ["<A-h>"] = { api.tree.toggle_custom_filter, "Toggle Hidden" },
 
     ["<leader>fg"] = { grep_at, "Grep At" },
 
