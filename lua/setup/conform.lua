@@ -21,6 +21,8 @@ conform.setup({
     jsonc = biome_cmd,
     lua = { { "stylua" } },
     sh = { { "shfmt" } },
+    yaml = { { "yamlfmt" } },
+    ["*"] = { "trim_whitespace" },
   },
 
   format_on_save = {
