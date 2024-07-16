@@ -1,3 +1,2 @@
-require("setup.diagnostic")
-require("config.generic")
+require("config.diagnostic")
 require("config.lazy")
