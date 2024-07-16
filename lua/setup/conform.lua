@@ -1,11 +1,14 @@
-local biome_cmd = { { "biome" } }
-local beautysh_args = { "--indent-size", "2", "--force-function-style", "fnpar" }
+local conform = require("conform")
 
-require("conform").setup({
+local biome_cmd = { { "biome" } }
+
+conform.setup({
 
   formatters = {
-    beautysh = {
-      prepend_args = beautysh_args,
+    shfmt = {
+      inherit = false,
+      command = "shfmt",
+      args = { "--case-indent", "--indent", 2, "--filename", "$FILENAME" },
     },
   },
 
@@ -17,7 +20,7 @@ require("conform").setup({
     json = biome_cmd,
     jsonc = biome_cmd,
     lua = { { "stylua" } },
-    sh = { { "beautysh" } },
+    sh = { { "shfmt" } },
   },
 
   format_on_save = {
@@ -36,5 +39,5 @@ vim.api.nvim_create_user_command("Format", function(args)
       ["end"] = { args.line2, end_line:len() },
     }
   end
-  require("conform").format({ async = true, lsp_fallback = true, range = range })
+  conform.format({ async = true, lsp_fallback = true, range = range })
 end, { range = true })
