@@ -15,6 +15,7 @@ return {
 
       integrations = {
         nvim_surround = true,
+        lsp_trouble = true,
       },
     })
 
