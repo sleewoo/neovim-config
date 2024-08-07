@@ -4,15 +4,11 @@ return {
     { "nvim-lua/popup.nvim" },
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "folke/trouble.nvim" },
   },
   config = function()
     local actions = require("telescope.actions")
     local builtin = require("telescope.builtin")
     local previewers = require("telescope.previewers")
-
-    require("telescope").load_extension("fzf")
-    require("telescope").load_extension("notify")
 
     require("telescope").setup({
       defaults = {
@@ -57,6 +53,18 @@ return {
             ["<A-Down>"] = actions.cycle_history_next,
             ["<A-Up>"] = actions.cycle_history_prev,
             ["<esc>"] = actions.close, -- always in insert mode
+            ["<C-u>"] = false, -- clear the prompt on <C-u>
+          },
+        },
+      },
+
+      pickers = {
+        buffers = {
+          mappings = {
+            i = {
+              -- delete a buffer from picker without closing telescope
+              ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
+            },
           },
         },
       },
@@ -70,14 +78,14 @@ return {
       },
     })
 
+    require("telescope").load_extension("fzf")
+    require("telescope").load_extension("notify")
+
     vim.keymap.set("n", "<leader>t?", builtin.builtin, {})
     vim.keymap.set("n", "<leader>tb", builtin.buffers, {})
     vim.keymap.set("n", "<leader>th", builtin.search_history, {})
     vim.keymap.set("n", "<leader>tr", builtin.resume, {})
     vim.keymap.set("n", "<leader>tn", ":Telescope notify<cr>", {})
-    vim.keymap.set("n", "<leader>td", function()
-      builtin.diagnostics({ bufnr = 0 })
-    end, {})
 
     vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
     vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
