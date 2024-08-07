@@ -27,7 +27,7 @@ return {
         end
 
         tsc.setup({
-          -- options goes here
+          use_trouble_qflist = true,
           flags = merge({ project = project }, flags),
         })
 
@@ -40,7 +40,7 @@ return {
       })
     end
 
-    userCmdFactory("TC", { watch = false })
-    userCmdFactory("TW", { watch = true })
+    userCmdFactory("TC", { noEmit = false, watch = false })
+    userCmdFactory("TW", { noEmit = false, watch = true })
   end,
 }
