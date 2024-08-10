@@ -38,6 +38,7 @@ return {
       calculator = "  ",
       folderOpen2 = " ﱮ ",
       tree = "  ",
+      database = " ⛁ ",
     }
 
     local source_mapping = {
@@ -49,6 +50,7 @@ return {
       calc = icons.calculator,
       path = icons.folderOpen2,
       treesitter = icons.tree,
+      ["vim-dadbod-completion"] = icons.database .. "DB",
     }
 
     local buffer_option = {
@@ -92,7 +94,7 @@ return {
     cmp.setup({
 
       completion = {
-        autocomplete = false,
+        -- autocomplete = false,
       },
 
       snippet = {
@@ -138,6 +140,13 @@ return {
 
       experimental = {
         ghost_text = true,
+      },
+    })
+
+    cmp.setup.filetype({ "sql" }, {
+      sources = {
+        { name = "vim-dadbod-completion" },
+        { name = "buffer" },
       },
     })
   end,

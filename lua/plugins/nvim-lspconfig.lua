@@ -31,7 +31,6 @@ return {
         "tsserver",
         "yamlls",
         "marksman",
-        "sqlls",
         "taplo",
         "volar",
         "emmet_ls",
