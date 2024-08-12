@@ -20,24 +20,24 @@ return {
     })
 
     local keymap = {
-      -- resizing splits
-      ["<C-S-A-Left>"] = smartSplits.resize_left,
-      ["<C-S-A-Down>"] = smartSplits.resize_down,
-      ["<C-S-A-Up>"] = smartSplits.resize_up,
-      ["<C-S-A-Right>"] = smartSplits.resize_right,
 
       -- moving between splits
-      ["<C-Left>"] = smartSplits.move_cursor_left,
-      ["<C-Down>"] = smartSplits.move_cursor_down,
-      ["<C-Up>"] = smartSplits.move_cursor_up,
-      ["<C-Right>"] = smartSplits.move_cursor_right,
-      ["<C-\\>"] = smartSplits.move_cursor_previous,
+      ["<A-Left>"] = smartSplits.move_cursor_left,
+      ["<A-Down>"] = smartSplits.move_cursor_down,
+      ["<A-Up>"] = smartSplits.move_cursor_up,
+      ["<A-Right>"] = smartSplits.move_cursor_right,
 
       -- swapping buffers between windows
       ["<A-S-Left>"] = smartSplits.swap_buf_left,
       ["<A-S-Down>"] = smartSplits.swap_buf_down,
       ["<A-S-Up>"] = smartSplits.swap_buf_up,
       ["<A-S-Right>"] = smartSplits.swap_buf_right,
+
+      -- resizing splits
+      ["<C-S-A-Left>"] = smartSplits.resize_left,
+      ["<C-S-A-Down>"] = smartSplits.resize_down,
+      ["<C-S-A-Up>"] = smartSplits.resize_up,
+      ["<C-S-A-Right>"] = smartSplits.resize_right,
     }
 
     local modes = { "n" }
