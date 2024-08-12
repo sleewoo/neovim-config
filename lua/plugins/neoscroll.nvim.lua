@@ -6,19 +6,19 @@ return {
     neoscroll.setup({ mappings = {} })
 
     local keymap = {
-      ["<A-Up>"] = function()
+      ["<C-Up>"] = function()
         neoscroll.scroll(-0.3, { move_cursor = false, duration = 100 })
       end,
 
-      ["<A-C-Up>"] = function()
+      ["<C-S-Up>"] = function()
         neoscroll.ctrl_u({ duration = 250 })
       end,
 
-      ["<A-Down>"] = function()
+      ["<C-Down>"] = function()
         neoscroll.scroll(0.3, { move_cursor = false, duration = 100 })
       end,
 
-      ["<A-C-Down>"] = function()
+      ["<C-S-Down>"] = function()
         neoscroll.ctrl_d({ duration = 250 })
       end,
     }
