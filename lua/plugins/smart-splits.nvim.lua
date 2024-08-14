@@ -7,13 +7,13 @@ return {
       -- wrap => Wrap to opposite side
       -- split => Create a new split in the desired direction
       -- stop => Do nothing
-      at_edge = "stop",
+      at_edge = "wrap",
 
       -- the default number of lines/columns to resize by at a time
       default_amount = 5,
 
       -- disable multiplexer navigation if current multiplexer pane is zoomed
-      disable_multiplexer_nav_when_zoomed = true,
+      disable_multiplexer_nav_when_zoomed = false,
 
       -- whether the cursor should follow the buffer when swapping
       cursor_follows_swapped_bufs = true,
