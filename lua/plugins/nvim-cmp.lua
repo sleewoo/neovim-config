@@ -94,7 +94,7 @@ return {
     cmp.setup({
 
       completion = {
-        -- autocomplete = false,
+        autocomplete = false,
       },
 
       snippet = {
