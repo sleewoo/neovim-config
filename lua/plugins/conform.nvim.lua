@@ -3,7 +3,7 @@ return {
   config = function()
     local conform = require("conform")
 
-    local biome_cmd = { { "biome" } }
+    local biome_cmd = { "biome" }
 
     conform.setup({
 
@@ -22,9 +22,9 @@ return {
         html = biome_cmd,
         json = biome_cmd,
         jsonc = biome_cmd,
-        lua = { { "stylua" } },
-        sh = { { "shfmt" } },
-        yaml = { { "yamlfmt" } },
+        lua = { "stylua" },
+        sh = { "shfmt" },
+        yaml = { "yamlfmt" },
         ["*"] = { "trim_whitespace" },
       },
 
