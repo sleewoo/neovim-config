@@ -21,7 +21,6 @@ return {
     }
 
     require("mason-lspconfig").setup({
-
       ensure_installed = {
         "bashls",
         "cssls",
@@ -36,6 +35,7 @@ return {
         "emmet_ls",
         "lua_ls",
         "biome",
+        "typos_lsp",
       },
     })
 
