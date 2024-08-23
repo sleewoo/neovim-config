@@ -38,8 +38,8 @@ set mouse=a
 set keymodel=startsel
 
 " display special chars
-set list
-set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»
+" set list
+" set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»
 ",eol:¶
 
 " show leader key in the bottom right corner
