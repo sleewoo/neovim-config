@@ -1,6 +1,6 @@
 return {
   "numToStr/Comment.nvim",
-  branch = "jsx",
+  version = "*",
   config = function()
     require("Comment").setup({
 

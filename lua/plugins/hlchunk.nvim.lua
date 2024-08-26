@@ -1,5 +1,6 @@
 return {
   "shellRaining/hlchunk.nvim",
+  version = "*",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     require("hlchunk").setup({

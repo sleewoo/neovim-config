@@ -1,5 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
+  version = "*",
   dependencies = {
     { "nvim-lua/popup.nvim" },
     { "nvim-lua/plenary.nvim" },
@@ -48,8 +49,8 @@ return {
             ["<C-s>"] = actions.select_horizontal,
             ["<C-Up>"] = actions.preview_scrolling_up,
             ["<C-Down>"] = actions.preview_scrolling_down,
-            ["<C-Left>"] = actions.preview_scrolling_left,
-            ["<C-Right>"] = actions.preview_scrolling_right,
+            -- ["<C-Left>"] = actions.preview_scrolling_left,
+            -- ["<C-Right>"] = actions.preview_scrolling_right,
             ["<A-Down>"] = actions.cycle_history_next,
             ["<A-Up>"] = actions.cycle_history_prev,
             ["<esc>"] = actions.close, -- always in insert mode

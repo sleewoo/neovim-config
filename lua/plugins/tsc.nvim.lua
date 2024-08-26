@@ -11,6 +11,7 @@ end
 
 return {
   "dmmulroy/tsc.nvim",
+  version = "*",
   dependencies = {
     "folke/trouble.nvim",
     "rcarriga/nvim-notify",
