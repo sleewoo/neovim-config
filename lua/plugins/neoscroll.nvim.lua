@@ -1,5 +1,6 @@
 return {
   "karb94/neoscroll.nvim",
+  version = "*",
   config = function()
     local neoscroll = require("neoscroll")
 

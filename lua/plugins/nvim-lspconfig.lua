@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  version = "*",
   event = "BufReadPre",
   dependencies = {
     "folke/neoconf.nvim",
@@ -35,7 +36,6 @@ return {
         "emmet_ls",
         "lua_ls",
         "biome",
-        "typos_lsp",
       },
     })
 
