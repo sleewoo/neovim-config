@@ -14,22 +14,23 @@ return {
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
         "bash",
-        "tsx",
-        "typescript",
-        "javascript",
-        "html",
         "css",
-        "vue",
         "gitcommit",
+        "glimmer", -- for handlebars support
+        "html",
+        "javascript",
         "json",
         "lua",
         "markdown",
-        "vim",
-        "yaml",
-        "toml",
-        "sql",
-        "xml",
         "markdown_inline",
+        "sql",
+        "toml",
+        "tsx",
+        "typescript",
+        "vim",
+        "vue",
+        "xml",
+        "yaml",
       }, -- one of "all", or a list of languages
 
       sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
@@ -59,15 +60,13 @@ return {
         enable = false,
         extended_mode = true,
       },
-
-      autotag = {
-        enable = true,
-      },
     })
 
     require("ts_context_commentstring").setup({
       enable = true,
       enable_autocmd = false,
     })
+
+    require("nvim-ts-autotag").setup()
   end,
 }
