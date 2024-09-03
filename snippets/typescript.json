@@ -1,4 +1,8 @@
 {
+  "import from node": {
+    "prefix": ["i/n"],
+    "body": ["import { $2 } from \"node:$1\";"]
+  },
   "import from ./": {
     "prefix": ["i/."],
     "body": ["import { $2 } from \"./$1\";"]
@@ -30,13 +34,5 @@
   "import default from @/": {
     "prefix": ["id/@"],
     "body": ["import $1 from \"@/$2\";"]
-  },
-  "import type from ~/": {
-    "prefix": ["it/~"],
-    "body": ["import type { $2 } from \"~/$1\";"]
-  },
-  "import type from @/": {
-    "prefix": ["it/@"],
-    "body": ["import type { $2 } from \"@/$1\";"]
   }
 }
