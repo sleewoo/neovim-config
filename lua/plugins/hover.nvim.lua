@@ -17,20 +17,6 @@ return {
         end,
         "hover.nvim",
       },
-
-      ["<A-,>"] = {
-        function()
-          hover.hover_switch("previous")
-        end,
-        "hover.nvim (prev source)",
-      },
-
-      ["<A-.>"] = {
-        function()
-          hover.hover_switch("next")
-        end,
-        "hover.nvim (next source)",
-      },
     }
 
     local modes = { "n" }
