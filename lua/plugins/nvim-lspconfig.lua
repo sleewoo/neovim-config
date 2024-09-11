@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  version = "*",
+  -- version = "*",
   event = "BufReadPre",
   dependencies = {
     "folke/neoconf.nvim",
@@ -28,7 +28,7 @@ return {
         "dockerls",
         "html",
         "jsonls",
-        "tsserver",
+        "ts_ls",
         "yamlls",
         "marksman",
         "taplo",
@@ -54,7 +54,7 @@ return {
           flags = flags,
         }
 
-        if server_name == "tsserver" then
+        if server_name == "ts_ls" then
           server_config.filetypes = { "typescript", "typescriptreact" }
         end
 
