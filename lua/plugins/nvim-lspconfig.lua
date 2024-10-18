@@ -7,6 +7,7 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
+    "smjonas/inc-rename.nvim",
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -39,6 +40,15 @@ return {
       },
     })
 
+    -- Use an on_attach function to only map the following keys
+    -- after the language server attaches to the current buffer
+    local on_attach = function(_, bufnr)
+      vim.keymap.set("n", "<leader>rr", ":IncRename ", { desc = "Refactor: rename symbol" })
+      vim.keymap.set("n", "<leader>rR", function()
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end, { expr = true, buffer = bufnr, desc = "Refactor: rename symbol (fill in the word under the cursor)" })
+    end
+
     require("mason-lspconfig").setup_handlers({
 
       -- The first entry (without a key) will be the default handler
@@ -52,6 +62,7 @@ return {
         local server_config = {
           capabilities = capabilities,
           flags = flags,
+          on_attach = on_attach,
         }
 
         if server_name == "ts_ls" then
