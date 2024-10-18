@@ -52,6 +52,7 @@ return {
     end
 
     vim.api.nvim_set_keymap("n", "<leader>go", "<cmd>lua _lazygit_toggle()<CR>", {
+      desc = "Git: Open Lazygit",
       noremap = true,
       silent = true,
     })
