@@ -5,6 +5,7 @@ return {
     { "nvim-lua/popup.nvim" },
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-ui-select.nvim" },
   },
   config = function()
     local actions = require("telescope.actions")
@@ -76,11 +77,15 @@ return {
           override_file_sorter = true,
           case_mode = "smart_case",
         },
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown({}),
+        },
       },
     })
 
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("notify")
+    require("telescope").load_extension("ui-select")
 
     vim.keymap.set("n", "<leader>t?", builtin.builtin, {})
     vim.keymap.set("n", "<leader>tb", builtin.buffers, {})
