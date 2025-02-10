@@ -44,7 +44,7 @@ return {
     -- after the language server attaches to the current buffer
     local on_attach = function(_, bufnr)
       vim.keymap.set("n", "<leader>rr", ":IncRename ", { desc = "Refactor: rename symbol" })
-      vim.keymap.set("n", "<leader>rR", function()
+      vim.keymap.set("n", "<leader>rf", function()
         return ":IncRename " .. vim.fn.expand("<cword>")
       end, { expr = true, buffer = bufnr, desc = "Refactor: rename symbol (fill in the word under the cursor)" })
     end
