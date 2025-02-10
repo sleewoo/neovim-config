@@ -20,7 +20,6 @@ return {
         typescript = biome_cmd,
         typescriptreact = biome_cmd,
         javascript = biome_cmd,
-        html = biome_cmd,
         json = biome_cmd,
         jsonc = biome_cmd,
         lua = { "stylua" },
