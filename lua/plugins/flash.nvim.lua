@@ -12,12 +12,25 @@ return {
       char = {
         -- hide after jump when not using jump labels
         autohide = true,
+        keys = { "f", "F", "t", "T", [";"] = "<a-]>", [","] = "<a-[>" },
+        char_actions = function(motion)
+          return {
+            [";"] = "right", -- set to `right` to always go right
+            [","] = "left", -- set to `left` to always go left
+            -- clever-f style
+            -- [motion:lower()] = "next",
+            -- [motion:upper()] = "prev",
+            -- jump2d style: same case goes next, opposite case goes prev
+            -- [motion] = "next",
+            -- [motion:match("%l") and motion:upper() or motion:lower()] = "prev",
+          }
+        end,
       },
     },
   },
   keys = {
     {
-      "<leader>s",
+      "<leader><leader>",
       mode = { "n", "x", "o" },
       function()
         require("flash").jump()
@@ -25,7 +38,7 @@ return {
       desc = "Flash",
     },
     {
-      "<A-s>",
+      "<leader>s",
       mode = { "n", "x", "o" },
       function()
         require("flash").treesitter()
