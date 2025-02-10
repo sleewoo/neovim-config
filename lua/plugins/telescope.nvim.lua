@@ -6,13 +6,16 @@ return {
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-ui-select.nvim" },
+    { "nvim-telescope/telescope-live-grep-args.nvim" },
   },
   config = function()
+    local telescope = require("telescope")
     local actions = require("telescope.actions")
     local builtin = require("telescope.builtin")
     local previewers = require("telescope.previewers")
+    local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 
-    require("telescope").setup({
+    telescope.setup({
       defaults = {
 
         border = true,
@@ -26,8 +29,7 @@ return {
           "--with-filename",
           "--line-number",
           "--column",
-          "--smart-case",
-          "--multiline",
+          "--case-sensitive",
         },
 
         layout_config = {
@@ -56,6 +58,7 @@ return {
             ["<A-Up>"] = actions.cycle_history_prev,
             ["<esc>"] = actions.close, -- always in insert mode
             ["<C-u>"] = false, -- clear the prompt on <C-u>
+            ["<C-space>"] = actions.to_fuzzy_refine,
           },
         },
       },
@@ -73,30 +76,48 @@ return {
 
       extensions = {
         fzf = {
-          override_generic_sorter = false,
+          fuzzy = true, -- false will only do exact matching
+          override_generic_sorter = true,
           override_file_sorter = true,
           case_mode = "smart_case",
         },
         ["ui-select"] = {
           require("telescope.themes").get_dropdown({}),
         },
+        live_grep_args = {
+          auto_quoting = false,
+        },
       },
     })
 
-    require("telescope").load_extension("fzf")
-    require("telescope").load_extension("notify")
-    require("telescope").load_extension("ui-select")
+    telescope.load_extension("fzf")
+    telescope.load_extension("notify")
+    telescope.load_extension("ui-select")
+    telescope.load_extension("live_grep_args")
 
-    vim.keymap.set("n", "<leader>t?", builtin.builtin, {})
-    vim.keymap.set("n", "<leader>tb", builtin.buffers, {})
-    vim.keymap.set("n", "<leader>th", builtin.search_history, {})
-    vim.keymap.set("n", "<leader>tr", builtin.resume, {})
-    vim.keymap.set("n", "<leader>tn", ":Telescope notify<cr>", {})
+    vim.keymap.set("n", "<leader>t?", builtin.builtin, { desc = "Telescope: Help" })
+    vim.keymap.set("n", "<leader>tb", builtin.buffers, { desc = "Telescope: Buffers" })
+    vim.keymap.set("n", "<leader>th", builtin.search_history, { desc = "Telescope: Search History" })
+    vim.keymap.set("n", "<leader>tr", builtin.resume, { desc = "Telescope: Resume" })
+    vim.keymap.set("n", "<leader>tn", ":Telescope notify<cr>", { desc = "Telescope: Notify" })
 
-    vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-    vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
-    vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-    vim.keymap.set("n", "<leader>fw", builtin.grep_string, {})
+    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
+    vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent Files" })
+
+    vim.keymap.set(
+      "n",
+      "<leader>fg",
+      ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+      { desc = "Live Grep - Find whatever, with args" }
+    )
+
+    vim.keymap.set("n", "<leader>fw", function()
+      return live_grep_args_shortcuts.grep_word_under_cursor({ postfix = " -w" })
+    end, { desc = "Live Grep - Find Word under cursor" })
+
+    vim.keymap.set("x", "<leader>f", function()
+      return live_grep_args_shortcuts.grep_visual_selection({ postfix = "" })
+    end, { desc = "Live Grep - Find selected text" })
 
     vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git: Status" })
     vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Git: Commits" })
