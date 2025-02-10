@@ -6,21 +6,6 @@ return {
   },
   config = function()
     local api = require("nvim-tree.api")
-    local lib = require("nvim-tree.lib")
-
-    local function grep_at(node)
-      if not node then
-        node = lib.get_node_at_cursor()
-      end
-      local path = node.absolute_path or uv.cwd()
-      if node.type ~= "directory" and node.parent then
-        path = node.parent.absolute_path
-      end
-      require("telescope.builtin").live_grep({
-        search_dirs = { path },
-        prompt_title = string.format("Grep in [%s]", vim.fs.basename(path)),
-      })
-    end
 
     local VIEW_WIDTH_FIXED = 40
     local view_width_max = VIEW_WIDTH_FIXED -- fixed to start
@@ -32,8 +17,7 @@ return {
       else
         view_width_max = -1
       end
-
-      require("nvim-tree.api").tree.reload()
+      api.tree.reload()
     end
 
     local function get_view_width_max()
@@ -98,8 +82,6 @@ return {
         ["<A-i>"] = { api.tree.toggle_gitignore_filter, "Toggle Git Ignore" },
         ["<A-.>"] = { api.tree.toggle_hidden_filter, "Toggle Dotfiles" },
         ["<A-h>"] = { api.tree.toggle_custom_filter, "Toggle Hidden" },
-
-        ["<leader>fg"] = { grep_at, "Grep At" },
 
         ["<A-w>"] = { toggle_width_adaptive, "Toggle Adaptive Width" },
 
