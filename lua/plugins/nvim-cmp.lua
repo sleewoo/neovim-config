@@ -1,5 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
+  lazy = false,
   event = "InsertEnter",
   dependencies = {
     "onsails/lspkind-nvim",
@@ -8,6 +9,7 @@ return {
     "hrsh7th/cmp-cmdline",
     "saadparwaiz1/cmp_luasnip",
     "SergioRibera/cmp-dotenv",
+    "Jezda1337/nvim-html-css",
   },
   config = function()
     local cmp_status_ok, cmp = pcall(require, "cmp")
@@ -38,6 +40,7 @@ return {
       calculator = "  ",
       folderOpen2 = " ﱮ ",
       tree = "  ",
+      html = "  ",
     }
 
     local source_mapping = {
@@ -49,6 +52,7 @@ return {
       calc = icons.calculator,
       path = icons.folderOpen2,
       treesitter = icons.tree,
+      ["html-css"] = icons.html .. "HTML/CSS",
     }
 
     local buffer_option = {
@@ -107,6 +111,20 @@ return {
         { name = "luasnip", priority = 80 },
         { name = "npm", priority = 70 },
         { name = "dotenv", priority = 60 },
+        {
+          name = "html-css",
+          priority = 50,
+          option = {
+            enable_on = { "html" },
+            notify = false,
+            documentation = {
+              auto_show = true,
+            },
+            style_sheets = {
+              "https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css",
+            },
+          },
+        },
       }),
 
       window = {
