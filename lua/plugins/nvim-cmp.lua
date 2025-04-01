@@ -9,7 +9,7 @@ return {
     "hrsh7th/cmp-cmdline",
     "saadparwaiz1/cmp_luasnip",
     "SergioRibera/cmp-dotenv",
-    "Jezda1337/nvim-html-css",
+    -- "Jezda1337/nvim-html-css",
   },
   config = function()
     local cmp_status_ok, cmp = pcall(require, "cmp")
@@ -111,20 +111,7 @@ return {
         { name = "luasnip", priority = 80 },
         { name = "npm", priority = 70 },
         { name = "dotenv", priority = 60 },
-        {
-          name = "html-css",
-          priority = 50,
-          option = {
-            enable_on = { "html" },
-            notify = false,
-            documentation = {
-              auto_show = true,
-            },
-            style_sheets = {
-              "https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css",
-            },
-          },
-        },
+        -- { name = "html-css", priority = 50 },
       }),
 
       window = {
