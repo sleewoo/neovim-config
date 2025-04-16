@@ -1,5 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
+  version = "*",
   lazy = false,
   event = "InsertEnter",
   dependencies = {
@@ -9,7 +10,6 @@ return {
     "hrsh7th/cmp-cmdline",
     "saadparwaiz1/cmp_luasnip",
     "SergioRibera/cmp-dotenv",
-    -- "Jezda1337/nvim-html-css",
   },
   config = function()
     local cmp_status_ok, cmp = pcall(require, "cmp")
@@ -111,7 +111,7 @@ return {
         { name = "luasnip", priority = 80 },
         { name = "npm", priority = 70 },
         { name = "dotenv", priority = 60 },
-        -- { name = "html-css", priority = 50 },
+        { name = "html-css", priority = 50 },
       }),
 
       window = {
