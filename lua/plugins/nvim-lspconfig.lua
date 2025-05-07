@@ -31,7 +31,6 @@ return {
         "jsonls",
         "ts_ls",
         "yamlls",
-        "marksman",
         "taplo",
         "volar",
         "emmet_ls",
