@@ -32,15 +32,14 @@ return {
     -- ╰──────────────────────────────────────────────────────────╯
 
     local icons = {
-      terminal = "  ",
+      terminal = "   ",
       paragraph = "  ",
-      buffer = " 🖹 ",
+      buffer = " 🖹",
       bomb = "  ",
       snippet = "  ",
       calculator = "  ",
       folderOpen2 = " ﱮ ",
       tree = "  ",
-      html = "  ",
     }
 
     local source_mapping = {
@@ -52,7 +51,6 @@ return {
       calc = icons.calculator,
       path = icons.folderOpen2,
       treesitter = icons.tree,
-      ["html-css"] = icons.html .. "HTML/CSS",
     }
 
     local buffer_option = {
@@ -81,16 +79,6 @@ return {
       item_with_kind.abbr = string.sub(item_with_kind.abbr, 1, item_with_kind.maxwidth)
 
       return item_with_kind
-    end
-
-    local function luasnip_cmp(fallback)
-      -- replace the expand_or_jumpable() with expand_or_locally_jumpable()
-      -- to only jump inside the snippet region
-      if luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
     end
 
     cmp.setup({
@@ -133,8 +121,6 @@ return {
           { "i", "c" }
         ),
 
-        ["<A-Left>"] = cmp.mapping(luasnip_cmp, { "i", "s" }),
-        ["<A-Right>"] = cmp.mapping(luasnip_cmp, { "i", "s" }),
         ["<C-Up>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
         ["<C-Down>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
         ["<Tab>"] = cmp.mapping.confirm({ select = true }),
