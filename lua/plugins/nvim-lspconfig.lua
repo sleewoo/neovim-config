@@ -17,7 +17,6 @@ return {
         "ts_ls",
         "yamlls",
         "taplo",
-        "volar",
         "emmet_ls",
         "lua_ls",
         "biome",
