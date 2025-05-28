@@ -16,10 +16,6 @@ local signs = {
   { name = "DapLogPoint", text = ".>", texthl = "DiagnosticInfo" },
 }
 
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, sign)
-end
-
 vim.diagnostic.config({
   virtual_text = true,
   float = {
