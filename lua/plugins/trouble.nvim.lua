@@ -16,8 +16,6 @@ return {
     },
   },
   config = function()
-    require("trouble").setup({
-      auto_preview = false,
-    })
+    require("trouble").setup()
   end,
 }
