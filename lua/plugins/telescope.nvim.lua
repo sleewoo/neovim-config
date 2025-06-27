@@ -2,11 +2,12 @@ return {
   "nvim-telescope/telescope.nvim",
   version = "*",
   dependencies = {
-    { "nvim-lua/popup.nvim" },
-    { "nvim-lua/plenary.nvim" },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "nvim-telescope/telescope-ui-select.nvim" },
-    { "nvim-telescope/telescope-live-grep-args.nvim" },
+    { "nvim-lua/popup.nvim", version = "*" },
+    { "nvim-lua/plenary.nvim", version = "*" },
+    { "nvim-telescope/telescope-file-browser.nvim", version = "*" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", version = "*" },
+    { "nvim-telescope/telescope-live-grep-args.nvim", version = "*" },
+    { "LukasPietzschmann/telescope-tabs", version = "*" },
   },
   config = function()
     local telescope = require("telescope")
@@ -59,30 +60,23 @@ return {
             ["<esc>"] = actions.close, -- always in insert mode
             ["<C-u>"] = false, -- clear the prompt on <C-u>
             ["<C-space>"] = actions.to_fuzzy_refine,
-          },
-        },
-      },
-
-      pickers = {
-        buffers = {
-          mappings = {
-            i = {
-              -- delete a buffer from picker without closing telescope
-              ["<C-d>"] = actions.delete_buffer + actions.move_to_top,
-            },
+            ["<C-t>"] = actions.select_tab, -- Ctrl-t to open in new tab
           },
         },
       },
 
       extensions = {
+        file_browser = {
+          follow_symlinks = true,
+          grouped = true,
+          hidden = true,
+          no_ignore = true,
+        },
         fzf = {
           fuzzy = true, -- false will only do exact matching
           override_generic_sorter = true,
           override_file_sorter = true,
           case_mode = "smart_case",
-        },
-        ["ui-select"] = {
-          require("telescope.themes").get_dropdown({}),
         },
         live_grep_args = {
           auto_quoting = false,
@@ -90,16 +84,26 @@ return {
       },
     })
 
+    telescope.load_extension("file_browser")
     telescope.load_extension("fzf")
     telescope.load_extension("notify")
-    telescope.load_extension("ui-select")
     telescope.load_extension("live_grep_args")
+    telescope.load_extension("telescope-tabs")
+
+    vim.keymap.set("n", "<leader>/", function()
+      telescope.extensions.file_browser.file_browser()
+    end, { desc = "Open File Browser" })
+
+    vim.keymap.set("n", "<leader>.", function()
+      telescope.extensions.file_browser.file_browser({ path = "%:p:h", select_buffer = true })
+    end, { desc = "Open File Browser at the path of the current buffer" })
 
     vim.keymap.set("n", "<leader>t?", builtin.builtin, { desc = "Telescope: Help" })
     vim.keymap.set("n", "<leader>tb", builtin.buffers, { desc = "Telescope: Buffers" })
     vim.keymap.set("n", "<leader>th", builtin.search_history, { desc = "Telescope: Search History" })
     vim.keymap.set("n", "<leader>tr", builtin.resume, { desc = "Telescope: Resume" })
     vim.keymap.set("n", "<leader>tn", ":Telescope notify<cr>", { desc = "Telescope: Notify" })
+    vim.keymap.set("n", "<leader>tt", "<cmd>Telescope telescope-tabs list_tabs<CR>", { desc = "Select Tab" })
 
     vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
     vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent Files" })
@@ -119,8 +123,10 @@ return {
       return live_grep_args_shortcuts.grep_visual_selection({ postfix = "" })
     end, { desc = "Live Grep - Find selected text" })
 
-    vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git: Status" })
-    vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Git: Commits" })
-    vim.keymap.set("n", "<leader>gb", builtin.git_bcommits, { desc = "Git: Current Buffer Commits" })
+    vim.keymap.set("n", "<a-/>", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy find in current buffer" })
+
+    vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = " Git: Status" })
+    vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = " Git: Commits" })
+    vim.keymap.set("n", "<leader>gb", builtin.git_bcommits, { desc = " Git: Current Buffer Commits" })
   end,
 }
