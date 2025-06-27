@@ -4,7 +4,7 @@ return {
   config = function()
     local conform = require("conform")
 
-    local biome_cmd = { "biome" }
+    local biome_cmd = { "biome-check" }
 
     conform.setup({
 
@@ -33,7 +33,7 @@ return {
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-        return { timeout_ms = 500, lsp_format = "fallback" }
+        return { timeout_ms = 500, lsp_format = "never" }
       end,
     })
 
@@ -46,7 +46,7 @@ return {
           ["end"] = { args.line2, end_line:len() },
         }
       end
-      conform.format({ async = true, lsp_fallback = true, range = range })
+      conform.format({ async = true, lsp_fallback = false, range = range })
     end, { range = true })
 
     vim.api.nvim_create_user_command("FormatDisable", function(args)
