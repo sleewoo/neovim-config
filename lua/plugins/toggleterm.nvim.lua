@@ -5,17 +5,10 @@ return {
     local Terminal = require("toggleterm.terminal").Terminal
 
     require("toggleterm").setup({
-
       shell = "$SHELL -l",
       terminal_mappings = true,
       insert_mappings = true,
       shading_factor = -10,
-
-      on_close = function()
-        if vim.fn.exists(":NvimTreeRefresh") > 0 then
-          vim.cmd("NvimTreeRefresh")
-        end
-      end,
     })
 
     -- base term
