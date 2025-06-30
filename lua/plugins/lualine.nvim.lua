@@ -1,58 +1,3 @@
-local function tabs_indicator_factory(_opts)
-  local opts = vim.tbl_extend("force", {
-    modified_symbol = "●",
-    modified_color = "#e06c75",
-    normal_color = nil,
-    format = function(count, modified, symbol)
-      return modified and string.format("%s %d Tabs", symbol, count) or string.format("%d Tabs", count)
-    end,
-  }, _opts or {})
-
-  local state = {
-    count = vim.fn.tabpagenr("$"),
-    modified = false,
-  }
-
-  local group = vim.api.nvim_create_augroup("TabStatus", { clear = true })
-
-  local update_state = function()
-    state.count = vim.fn.tabpagenr("$")
-    state.modified = false
-    for tab = 1, state.count do
-      for _, bufnr in ipairs(vim.fn.tabpagebuflist(tab)) do
-        if vim.bo[bufnr].modified then
-          state.modified = true
-          return
-        end
-      end
-    end
-  end
-
-  vim.api.nvim_create_autocmd({
-    "TabEnter",
-    "TabClosed",
-    "BufModifiedSet",
-    "BufEnter",
-    "BufWritePost",
-  }, {
-    group = group,
-    callback = update_state,
-    desc = "Update tab status indicator state",
-  })
-
-  -- Initial update
-  update_state()
-
-  return {
-    function()
-      return opts.format(state.count, state.modified, opts.modified_symbol)
-    end,
-    color = function()
-      return state.modified and { fg = opts.modified_color } or opts.normal_color
-    end,
-  }
-end
-
 return {
   "nvim-lualine/lualine.nvim",
   config = function()
@@ -69,9 +14,25 @@ return {
 
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { tabs_indicator_factory() },
-        lualine_c = { "diff" },
-        lualine_x = { "lsp_status", "encoding", "fileformat", "filetype" },
+        lualine_b = {
+          {
+            "tabs",
+            mode = 1,
+            symbols = {
+              modified = "",
+            },
+            fmt = function(_, ctx)
+              for _, b in ipairs(vim.fn.tabpagebuflist(ctx.tabnr)) do
+                if vim.api.nvim_buf_get_option(b, "modified") then
+                  return ctx.tabnr .. " ◆"
+                end
+              end
+              return ctx.tabnr
+            end,
+          },
+        },
+        lualine_c = {},
+        lualine_x = { "diff", "encoding", "fileformat", "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },
@@ -84,8 +45,8 @@ return {
             newfile_status = false,
             path = 1,
             symbols = {
-              modified = "●",
-              readonly = "◌",
+              modified = "◆",
+              readonly = "◇",
               unnamed = "[No Name]",
               newfile = "[New]",
             },
