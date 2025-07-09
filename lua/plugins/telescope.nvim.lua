@@ -90,11 +90,7 @@ return {
     telescope.load_extension("live_grep_args")
     telescope.load_extension("telescope-tabs")
 
-    vim.keymap.set("n", "<leader>/", function()
-      telescope.extensions.file_browser.file_browser()
-    end, { desc = "Open File Browser" })
-
-    vim.keymap.set("n", "<leader>.", function()
+    vim.keymap.set("n", "<a-space>", function()
       telescope.extensions.file_browser.file_browser({ path = "%:p:h", select_buffer = true })
     end, { desc = "Open File Browser at the path of the current buffer" })
 
