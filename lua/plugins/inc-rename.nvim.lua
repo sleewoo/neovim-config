@@ -1,5 +1,6 @@
 return {
   "smjonas/inc-rename.nvim",
+  version = nil,
   config = function()
     vim.keymap.set("n", "<leader>rr", ":IncRename ", { desc = "Refactor: rename symbol" })
 

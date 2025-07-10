@@ -1,5 +1,6 @@
 return {
   "assistcontrol/readline.nvim",
+  version = nil,
   config = function()
     local readline = require("readline")
 

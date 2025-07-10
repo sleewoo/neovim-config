@@ -25,6 +25,13 @@ vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
 require("lazy").setup({
+  defaults = {
+    -- use latest release by default.
+    -- for plugins that does not use semver releases,
+    -- set `version = nil` to use latest git commit.
+    -- or set version to specific git commit.
+    version = "*",
+  },
   spec = {
     -- import your plugins
     { import = "plugins" },

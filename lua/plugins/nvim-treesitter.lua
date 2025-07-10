@@ -3,7 +3,6 @@ vim.opt.smartindent = false
 
 return {
   "nvim-treesitter/nvim-treesitter",
-  version = "*",
   event = "BufReadPre",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",

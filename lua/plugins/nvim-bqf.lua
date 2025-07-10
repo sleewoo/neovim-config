@@ -55,5 +55,4 @@ vim.o.qftf = "{info -> v:lua._G.qftf(info)}"
 return {
   -- better quickfix
   "kevinhwang91/nvim-bqf",
-  version = "*",
 }

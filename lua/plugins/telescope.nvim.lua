@@ -1,13 +1,12 @@
 return {
   "nvim-telescope/telescope.nvim",
-  version = "*",
   dependencies = {
-    { "nvim-lua/popup.nvim", version = "*" },
-    { "nvim-lua/plenary.nvim", version = "*" },
-    { "nvim-telescope/telescope-file-browser.nvim", version = "*" },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", version = "*" },
-    { "nvim-telescope/telescope-live-grep-args.nvim", version = "*" },
-    { "LukasPietzschmann/telescope-tabs", version = "*" },
+    { "nvim-lua/popup.nvim" },
+    { "nvim-lua/plenary.nvim" },
+    { "nvim-telescope/telescope-file-browser.nvim" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-live-grep-args.nvim" },
+    { "LukasPietzschmann/telescope-tabs" },
   },
   config = function()
     local telescope = require("telescope")

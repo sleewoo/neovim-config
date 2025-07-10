@@ -1,5 +1,6 @@
 return {
   "dnlhc/glance.nvim",
+  version = nil,
   lazy = false,
   config = function()
     local glance = require("glance")

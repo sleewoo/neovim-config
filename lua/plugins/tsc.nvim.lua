@@ -1,9 +1,8 @@
 return {
   "dmmulroy/tsc.nvim",
-  version = "*",
   dependencies = {
-    { "folke/trouble.nvim", version = "*" },
-    { "rcarriga/nvim-notify", version = "*" },
+    { "folke/trouble.nvim" },
+    { "rcarriga/nvim-notify" },
   },
   config = function()
     require("tsc").setup({

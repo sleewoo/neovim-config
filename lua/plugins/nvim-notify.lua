@@ -1,6 +1,5 @@
 return {
   "rcarriga/nvim-notify",
-  version = "*",
   init = function()
     local notify = require("notify")
 

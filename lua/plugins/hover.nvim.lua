@@ -1,5 +1,6 @@
 return {
   "lewis6991/hover.nvim",
+  version = nil,
   config = function()
     local hover = require("hover")
 

@@ -1,5 +1,6 @@
 return {
   "folke/zen-mode.nvim",
+  version = nil,
   opts = {
     plugins = {
       twilight = { enabled = false },
