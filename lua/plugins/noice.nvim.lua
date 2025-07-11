@@ -9,6 +9,38 @@ return {
     messages = {
       level = "warn", -- Only show warnings and errors
     },
+    views = {
+      cmdline_popup = {
+        position = {
+          row = 25, -- vertical center
+          col = "50%", -- horizontal center (optional)
+        },
+        size = {
+          width = "50%",
+          height = "auto",
+        },
+      },
+      popupmenu = {
+        relative = "editor",
+        position = {
+          row = 28, -- just *below* cmdline_popup
+          col = "50%",
+        },
+        size = {
+          width = "50%",
+          height = 10,
+        },
+        border = {
+          style = "rounded",
+        },
+        win_options = {
+          winhighlight = {
+            Normal = "Normal",
+            FloatBorder = "FloatBorder",
+          },
+        },
+      },
+    },
     lsp = {
       hover = {
         enabled = false, -- using hover.nvim
@@ -22,7 +54,6 @@ return {
     },
     presets = {
       bottom_search = true, -- use a classic bottom cmdline for search
-      command_palette = true, -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
       inc_rename = true, -- enables an input dialog for inc-rename.nvim
     },
