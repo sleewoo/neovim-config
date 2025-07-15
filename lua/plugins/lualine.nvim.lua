@@ -14,23 +14,7 @@ return {
 
       sections = {
         lualine_a = { "mode" },
-        lualine_b = {
-          {
-            "tabs",
-            mode = 1,
-            symbols = {
-              modified = "",
-            },
-            fmt = function(_, ctx)
-              for _, b in ipairs(vim.fn.tabpagebuflist(ctx.tabnr)) do
-                if vim.api.nvim_buf_get_option(b, "modified") then
-                  return ctx.tabnr .. " ◆"
-                end
-              end
-              return ctx.tabnr
-            end,
-          },
-        },
+        lualine_b = {},
         lualine_c = {},
         lualine_x = { "diff", "encoding", "fileformat", "filetype" },
         lualine_y = { "progress" },
@@ -53,6 +37,23 @@ return {
           },
         },
         lualine_b = { "diagnostics" },
+        lualine_y = {
+          {
+            "tabs",
+            mode = 1,
+            symbols = {
+              modified = "",
+            },
+            fmt = function(_, ctx)
+              for _, b in ipairs(vim.fn.tabpagebuflist(ctx.tabnr)) do
+                if vim.api.nvim_buf_get_option(b, "modified") then
+                  return ctx.tabnr .. " ◆"
+                end
+              end
+              return ctx.tabnr
+            end,
+          },
+        },
       },
 
       inactive_winbar = {
