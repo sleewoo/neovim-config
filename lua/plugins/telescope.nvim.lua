@@ -89,6 +89,10 @@ return {
     telescope.load_extension("live_grep_args")
     telescope.load_extension("telescope-tabs")
 
+    vim.keymap.set("n", "<leader>e", function()
+      telescope.extensions.file_browser.file_browser()
+    end, { desc = "Open File Browser" })
+
     vim.keymap.set("n", "<a-space>", function()
       telescope.extensions.file_browser.file_browser({ path = "%:p:h", select_buffer = true })
     end, { desc = "Open File Browser at the path of the current buffer" })
@@ -118,7 +122,7 @@ return {
       return live_grep_args_shortcuts.grep_visual_selection({ postfix = "" })
     end, { desc = "Live Grep - Find selected text" })
 
-    vim.keymap.set("n", "<a-/>", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy find in current buffer" })
+    vim.keymap.set("n", "?", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy find in current buffer" })
 
     vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = " Git: Status" })
     vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = " Git: Commits" })
