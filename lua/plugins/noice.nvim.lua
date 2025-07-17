@@ -16,7 +16,8 @@ return {
           col = "50%", -- horizontal center (optional)
         },
         size = {
-          width = "50%",
+          min_width = 60,
+          width = "auto",
           height = "auto",
         },
       },
@@ -27,7 +28,8 @@ return {
           col = "50%",
         },
         size = {
-          width = "50%",
+          min_width = 60,
+          width = "auto",
           height = 10,
         },
         border = {
