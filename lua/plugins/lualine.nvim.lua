@@ -47,7 +47,7 @@ return {
             fmt = function(_, ctx)
               for _, b in ipairs(vim.fn.tabpagebuflist(ctx.tabnr)) do
                 if vim.api.nvim_buf_get_option(b, "modified") then
-                  return ctx.tabnr .. " ◆"
+                  return "◆ " .. ctx.tabnr
                 end
               end
               return ctx.tabnr
