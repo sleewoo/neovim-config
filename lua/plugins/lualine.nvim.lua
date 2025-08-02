@@ -63,6 +63,7 @@ return {
             path = 1,
           },
         },
+        lualine_b = { "diagnostics" },
       },
 
       tabline = {},
