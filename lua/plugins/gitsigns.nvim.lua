@@ -6,6 +6,12 @@ return {
     local gitsigns = require("gitsigns")
 
     gitsigns.setup({
+      watch_gitdir = {
+        interval = 1000,
+        follow_files = true,
+      },
+      update_debounce = 500, -- reduce update frequency
+      max_file_length = 10000, -- skip big files
       on_attach = function(bufnr)
         local function map(mode, l, r, opts)
           opts = opts or {}
