@@ -6,7 +6,6 @@ return {
     { "nvim-telescope/telescope-file-browser.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-live-grep-args.nvim" },
-    { "LukasPietzschmann/telescope-tabs" },
   },
   config = function()
     local telescope = require("telescope")
@@ -70,6 +69,7 @@ return {
           grouped = true,
           hidden = true,
           no_ignore = true,
+          git_status = false,
         },
         fzf = {
           fuzzy = true, -- false will only do exact matching
@@ -87,7 +87,6 @@ return {
     telescope.load_extension("fzf")
     telescope.load_extension("notify")
     telescope.load_extension("live_grep_args")
-    telescope.load_extension("telescope-tabs")
 
     vim.keymap.set("n", "<leader>e", function()
       telescope.extensions.file_browser.file_browser()
