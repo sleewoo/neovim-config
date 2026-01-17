@@ -3,7 +3,6 @@ return {
   lazy = false,
   event = "InsertEnter",
   dependencies = {
-    "onsails/lspkind-nvim",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-cmdline",
@@ -18,11 +17,6 @@ return {
 
     local snip_status_ok, luasnip = pcall(require, "luasnip")
     if not snip_status_ok then
-      return
-    end
-
-    local lspkind_status_ok, lspkind = pcall(require, "lspkind")
-    if not lspkind_status_ok then
       return
     end
 
@@ -64,22 +58,6 @@ return {
       winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
     }
 
-    local function format(entry, vim_item)
-      -- Get the item with kind from the lspkind plugin
-      local item_with_kind = lspkind.cmp_format({
-        mode = "symbol_text",
-        maxwidth = 50,
-        symbol_map = source_mapping,
-      })(entry, vim_item)
-
-      item_with_kind.kind = lspkind.symbolic(item_with_kind.kind, { with_text = true })
-      item_with_kind.menu = source_mapping[entry.source.name]
-      item_with_kind.menu = vim.trim(item_with_kind.menu or "")
-      item_with_kind.abbr = string.sub(item_with_kind.abbr, 1, item_with_kind.maxwidth)
-
-      return item_with_kind
-    end
-
     cmp.setup({
 
       completion = {
@@ -104,11 +82,6 @@ return {
       window = {
         completion = cmp.config.window.bordered(border_opts),
         documentation = cmp.config.window.bordered(border_opts),
-      },
-
-      formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = format,
       },
 
       mapping = cmp.mapping.preset.insert({
