@@ -7,7 +7,6 @@ return {
     require("lualine").setup({
 
       options = {
-        theme = "catppuccin",
         globalstatus = true,
         ignore_focus = { "toggleterm" },
       },

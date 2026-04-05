@@ -13,13 +13,10 @@ return {
         percentage = 0.3, -- percentage of the shade to apply to the inactive window
       },
 
-      integrations = {
-        nvim_surround = true,
-        lsp_trouble = true,
-        which_key = true,
-      },
+      default_integrations = false,
+      auto_integrations = true,
     })
 
-    vim.cmd.colorscheme("catppuccin")
+    vim.cmd.colorscheme("catppuccin-nvim")
   end,
 }
