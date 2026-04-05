@@ -103,6 +103,11 @@ return {
     vim.keymap.set("n", "<leader>tn", ":Telescope notify<cr>", { desc = "Telescope: Notify" })
     vim.keymap.set("n", "<leader>tt", "<cmd>Telescope telescope-tabs list_tabs<CR>", { desc = "Select Tab" })
 
+    vim.keymap.set("n", "<leader>dw", builtin.diagnostics, { desc = "Telescope: Workspace Diagnostics" })
+    vim.keymap.set("n", "<leader>db", function()
+      return builtin.diagnostics({ bufnr = 0 })
+    end, { desc = "Telescope: Buffer Diagnostics" })
+
     vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
     vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent Files" })
 
